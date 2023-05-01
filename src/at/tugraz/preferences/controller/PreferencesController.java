@@ -4,18 +4,18 @@ import at.tugraz.preferences.model.PreferencesModel;
 import at.tugraz.preferences.view.PreferencesView;
 
 public class PreferencesController {
-  private PreferencesModel preferencesmodel = new PreferencesModel();
-  private PreferencesView preferencesview = new PreferencesView();
+  private PreferencesModel pm = new PreferencesModel();
+  private PreferencesView pv = new PreferencesView();
   public PreferencesController(){
-    preferencesview.init(this, preferencesmodel);
+    pv.init(this, pm);
   }
   public void init(){
-    setState(initialState); advanceState("init");
+    setState(INITIAL_STATE); advanceState("init");
   }
-  private InitialState initialState = new InitialState();
-  private InterestThemesState interestthemes = new InterestThemesState();
-  private ActivitiesState activities = new ActivitiesState();
-  private SummarizationState summarization = new SummarizationState();
+  private INIT INITIAL_STATE = new INIT();
+  private INTEREST_THEMES INTEREST_THEMES = new INTEREST_THEMES();
+  private ACTIVITIES ACTIVITIES = new ACTIVITIES();
+  private SUMMARIZATION SUMMARIZATION = new SUMMARIZATION();
   private ControllerState state;
   private void setState(ControllerState state_) {
     state = state_;
@@ -39,19 +39,18 @@ public class PreferencesController {
     public void back() {}
     public void store() {}
   }
-  private class InitialState extends ControllerState {
-    public void init() { setState(interestthemes); preferencesview.ShowInterestThemes();}
+  private class INIT extends ControllerState {
+    public void init() { setState(INTEREST_THEMES); pv.ShowInterestThemes();}
   }
-  private class InterestThemesState extends ControllerState {
-    public void next() { setState(activities); preferencesview.ShowActivities();}
+  private class INTEREST_THEMES extends ControllerState {
+    public void next() { setState(ACTIVITIES); pv.ShowActivities();}
   }
-  private class ActivitiesState extends ControllerState {
-    public void next() {setState(summarization); preferencesview.ShowSummarization();}
-    public void back() {setState(interestthemes); preferencesview.ShowInterestThemes();}
+  private class ACTIVITIES extends ControllerState {
+    public void next() {setState(SUMMARIZATION); pv.ShowSummarization();}
+    public void back() {setState(INTEREST_THEMES); pv.ShowInterestThemes();}
   }
-  private class SummarizationState extends ControllerState {
-    public void back() {setState(activities); preferencesview.ShowActivities();}
-    public void store() {preferencesmodel.store();}
+  private class SUMMARIZATION extends ControllerState {
+    public void back() {setState(ACTIVITIES); pv.ShowActivities();}
+    public void store() {pm.store(); pv.ShowStored();}
   }
 }
-

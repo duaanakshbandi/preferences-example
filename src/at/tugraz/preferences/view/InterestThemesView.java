@@ -1,14 +1,8 @@
 package at.tugraz.preferences.view;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 public class InterestThemesView {
-  private JComboBox cbAdventure;
-  private JComboBox cbCulture;
-  private JComboBox cbSports;
-  private JButton nextButton;
-  private JPanel panel;
   public int getAdventureValue() {
     return Integer.parseInt(cbAdventure.getSelectedItem().toString());
   }
@@ -24,7 +18,6 @@ public class InterestThemesView {
   public interface NextButtonClickListener {
     void onNextButtonClicked();
   }
-  private NextButtonClickListener nextButtonClickListener;
   public InterestThemesView() {
     nextButton.addActionListener(new ActionListener() {
       @Override
@@ -38,4 +31,10 @@ public class InterestThemesView {
   public void setNextButtonClickListener(NextButtonClickListener listener) {
     this.nextButtonClickListener = listener;
   }
+  private JComboBox cbAdventure;
+  private JComboBox cbCulture;
+  private JComboBox cbSports;
+  private JButton nextButton;
+  private JPanel panel;
+  private NextButtonClickListener nextButtonClickListener;
 }

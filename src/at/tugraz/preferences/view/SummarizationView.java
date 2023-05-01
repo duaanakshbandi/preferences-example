@@ -1,18 +1,8 @@
 package at.tugraz.preferences.view;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 public class SummarizationView {
-  private JLabel adventureValue;
-  private JLabel cultureValue;
-  private JLabel sportsValue;
-  private JLabel saunaValue;
-  private JLabel tennisValue;
-  private JLabel gymValue;
-  private JButton backButton;
-  private JButton storeButton;
-  private JPanel panel;
   public void setAdventureValue(Integer adventureValue_) {
     adventureValue.setText(adventureValue_.toString());
   }
@@ -37,7 +27,9 @@ public class SummarizationView {
   public interface BackButtonClickListener {
     void onBackButtonClicked();
   }
-  private BackButtonClickListener backButtonClickListener;
+  public interface StoreButtonClickListener {
+    void onStoreButtonClicked();
+  }
   public SummarizationView() {
     backButton.addActionListener(new ActionListener() {
       @Override
@@ -47,8 +39,30 @@ public class SummarizationView {
         }
       }
     });
+    storeButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (storeButtonClickListener != null) {
+          storeButtonClickListener.onStoreButtonClicked();
+        }
+      }
+    });
   }
   public void setBackButtonClickListener(BackButtonClickListener listener) {
     this.backButtonClickListener = listener;
   }
+  public void setStoreButtonClickListener(StoreButtonClickListener listener) {
+    this.storeButtonClickListener = listener;
+  }
+  private JLabel adventureValue;
+  private JLabel cultureValue;
+  private JLabel sportsValue;
+  private JLabel saunaValue;
+  private JLabel tennisValue;
+  private JLabel gymValue;
+  private JButton backButton;
+  private JButton storeButton;
+  private JPanel panel;
+  private BackButtonClickListener backButtonClickListener;
+  private StoreButtonClickListener storeButtonClickListener;
 }

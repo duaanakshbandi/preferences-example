@@ -1,15 +1,8 @@
 package at.tugraz.preferences.view;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 public class ActivitiesView {
-  private JComboBox cbSauna;
-  private JComboBox cbTennis;
-  private JComboBox cbGym;
-  private JButton backButton;
-  private JButton nextButton;
-  private JPanel panel;
   public int getSaunaValue() {
     return Integer.parseInt(cbSauna.getSelectedItem().toString());
   }
@@ -28,8 +21,6 @@ public class ActivitiesView {
   public interface NextButtonClickListener {
     void onNextButtonClicked();
   }
-  private BackButtonClickListener backButtonClickListener;
-  private NextButtonClickListener nextButtonClickListener;
   public ActivitiesView() {
     backButton.addActionListener(new ActionListener() {
       @Override
@@ -54,4 +45,12 @@ public class ActivitiesView {
   public void setNextButtonClickListener(NextButtonClickListener listener) {
     this.nextButtonClickListener = listener;
   }
+  private JComboBox cbSauna;
+  private JComboBox cbTennis;
+  private JComboBox cbGym;
+  private JButton backButton;
+  private JButton nextButton;
+  private JPanel panel;
+  private BackButtonClickListener backButtonClickListener;
+  private NextButtonClickListener nextButtonClickListener;
 }

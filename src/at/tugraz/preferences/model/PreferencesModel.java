@@ -1,5 +1,4 @@
 package at.tugraz.preferences.model;
-
 public class PreferencesModel {
   public void store() {
   }

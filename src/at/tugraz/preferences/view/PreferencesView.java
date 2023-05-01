@@ -1,13 +1,13 @@
 package at.tugraz.preferences.view;
-
 import at.tugraz.preferences.controller.PreferencesController;
 import at.tugraz.preferences.model.PreferencesModel;
-
 import javax.swing.*;
 public class PreferencesView extends JFrame {
   public void init(PreferencesController preferencescontroller, PreferencesModel preferencesmodel) {
     this.preferencescontroller = preferencescontroller;
     this.preferencesmodel = preferencesmodel;
+    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    setSize(450, 300);
   }
   public void ShowInterestThemes() {
     interestThemesFrame.setNextButtonClickListener(new InterestThemesView.NextButtonClickListener() {
@@ -19,11 +19,8 @@ public class PreferencesView extends JFrame {
         preferencescontroller.advanceState("next");
       }
     });
-
-    setContentPane(interestThemesFrame.getPanel());
-    setSize(450, 300);
     setTitle("Preference Elicitation: Activities");
-    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    setContentPane(interestThemesFrame.getPanel());
     setVisible(true);
   }
   public void ShowActivities() {
@@ -42,10 +39,8 @@ public class PreferencesView extends JFrame {
         preferencescontroller.advanceState("next");
       }
     });
-    setContentPane(activitiesFrame.getPanel());
-    setSize(450, 300);
     setTitle("Preference Elicitation: Activities");
-    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    setContentPane(activitiesFrame.getPanel());
     setVisible(true);
   }
   public void ShowSummarization() {
@@ -55,7 +50,12 @@ public class PreferencesView extends JFrame {
         preferencescontroller.advanceState("back");
       }
     });
-
+    summarizationFrame.setStoreButtonClickListener(new SummarizationView.StoreButtonClickListener() {
+      @Override
+      public void onStoreButtonClicked() {
+        preferencescontroller.advanceState("store");
+      }
+    });
     summarizationFrame.setAdventureValue(preferencesmodel.getAdventure());
     summarizationFrame.setCultureValue(preferencesmodel.getCulture());
     summarizationFrame.setSportsValue(preferencesmodel.getSports());
@@ -63,11 +63,12 @@ public class PreferencesView extends JFrame {
     summarizationFrame.setTennisValue(preferencesmodel.getTennis());
     summarizationFrame.setGymValue(preferencesmodel.getGym());
 
-    setContentPane(summarizationFrame.getPanel());
     setTitle("Preference Elicitation: Summary");
-    setSize(450, 300);
-    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    setContentPane(summarizationFrame.getPanel());
     setVisible(true);
+  }
+  public void ShowStored() {
+    JOptionPane.showMessageDialog(null, "Preferences stored!");
   }
   private PreferencesController preferencescontroller;
   private PreferencesModel preferencesmodel;
