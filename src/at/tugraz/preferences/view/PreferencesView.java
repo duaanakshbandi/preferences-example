@@ -1,3 +1,8 @@
+package at.tugraz.preferences.view;
+
+import at.tugraz.preferences.controller.PreferencesController;
+import at.tugraz.preferences.model.PreferencesModel;
+
 import javax.swing.*;
 public class PreferencesView extends JFrame {
   public void setController(PreferencesController preferencescontroller) {

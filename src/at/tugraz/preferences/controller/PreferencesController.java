@@ -1,3 +1,8 @@
+package at.tugraz.preferences.controller;
+
+import at.tugraz.preferences.model.PreferencesModel;
+import at.tugraz.preferences.view.PreferencesView;
+
 public class PreferencesController {
   private PreferencesModel preferencesmodel;
   private PreferencesView preferencesview;
