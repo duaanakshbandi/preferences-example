@@ -3,7 +3,7 @@ package at.tugraz.preferences.view;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-public class ActivitiesGUI {
+public class ActivitiesView {
   private JComboBox cbSauna;
   private JComboBox cbTennis;
   private JComboBox cbGym;
@@ -30,7 +30,7 @@ public class ActivitiesGUI {
   }
   private BackButtonClickListener backButtonClickListener;
   private NextButtonClickListener nextButtonClickListener;
-  public ActivitiesGUI() {
+  public ActivitiesView() {
     backButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {

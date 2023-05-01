@@ -10,7 +10,7 @@ public class PreferencesView extends JFrame {
     this.preferencesmodel = preferencesmodel;
   }
   public void ShowInterestThemes() {
-    interestThemesFrame.setNextButtonClickListener(new InterestThemesGUI.NextButtonClickListener() {
+    interestThemesFrame.setNextButtonClickListener(new InterestThemesView.NextButtonClickListener() {
       @Override
       public void onNextButtonClicked() {
         preferencesmodel.setAdventure(interestThemesFrame.getAdventureValue());
@@ -27,13 +27,13 @@ public class PreferencesView extends JFrame {
     setVisible(true);
   }
   public void ShowActivities() {
-    activitiesFrame.setBackButtonClickListener(new ActivitiesGUI.BackButtonClickListener() {
+    activitiesFrame.setBackButtonClickListener(new ActivitiesView.BackButtonClickListener() {
       @Override
       public void onBackButtonClicked() {
         preferencescontroller.advanceState("back");
       }
     });
-    activitiesFrame.setNextButtonClickListener(new ActivitiesGUI.NextButtonClickListener() {
+    activitiesFrame.setNextButtonClickListener(new ActivitiesView.NextButtonClickListener() {
       @Override
       public void onNextButtonClicked() {
         preferencesmodel.setSauna(activitiesFrame.getSaunaValue());
@@ -49,7 +49,7 @@ public class PreferencesView extends JFrame {
     setVisible(true);
   }
   public void ShowSummarization() {
-    summarizationFrame.setBackButtonClickListener(new SummarizationGUI.BackButtonClickListener() {
+    summarizationFrame.setBackButtonClickListener(new SummarizationView.BackButtonClickListener() {
       @Override
       public void onBackButtonClicked() {
         preferencescontroller.advanceState("back");
@@ -71,7 +71,7 @@ public class PreferencesView extends JFrame {
   }
   private PreferencesController preferencescontroller;
   private PreferencesModel preferencesmodel;
-  private InterestThemesGUI interestThemesFrame = new InterestThemesGUI();
-  private ActivitiesGUI activitiesFrame = new ActivitiesGUI();
-  private SummarizationGUI summarizationFrame = new SummarizationGUI();
+  private InterestThemesView interestThemesFrame = new InterestThemesView();
+  private ActivitiesView activitiesFrame = new ActivitiesView();
+  private SummarizationView summarizationFrame = new SummarizationView();
 }

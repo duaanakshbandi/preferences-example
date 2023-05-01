@@ -3,7 +3,7 @@ package at.tugraz.preferences.view;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-public class InterestThemesGUI {
+public class InterestThemesView {
   private JComboBox cbAdventure;
   private JComboBox cbCulture;
   private JComboBox cbSports;
@@ -25,7 +25,7 @@ public class InterestThemesGUI {
     void onNextButtonClicked();
   }
   private NextButtonClickListener nextButtonClickListener;
-  public InterestThemesGUI() {
+  public InterestThemesView() {
     nextButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {

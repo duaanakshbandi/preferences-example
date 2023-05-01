@@ -3,7 +3,7 @@ package at.tugraz.preferences.view;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-public class SummarizationGUI {
+public class SummarizationView {
   private JLabel adventureValue;
   private JLabel cultureValue;
   private JLabel sportsValue;
@@ -38,7 +38,7 @@ public class SummarizationGUI {
     void onBackButtonClicked();
   }
   private BackButtonClickListener backButtonClickListener;
-  public SummarizationGUI() {
+  public SummarizationView() {
     backButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
