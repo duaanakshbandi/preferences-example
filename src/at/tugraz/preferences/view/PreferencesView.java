@@ -5,10 +5,8 @@ import at.tugraz.preferences.model.PreferencesModel;
 
 import javax.swing.*;
 public class PreferencesView extends JFrame {
-  public void setController(PreferencesController preferencescontroller) {
+  public void init(PreferencesController preferencescontroller, PreferencesModel preferencesmodel) {
     this.preferencescontroller = preferencescontroller;
-  }
-  public void setModel(PreferencesModel preferencesmodel) {
     this.preferencesmodel = preferencesmodel;
   }
   public void ShowInterestThemes() {

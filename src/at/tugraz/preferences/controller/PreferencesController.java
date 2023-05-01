@@ -4,11 +4,10 @@ import at.tugraz.preferences.model.PreferencesModel;
 import at.tugraz.preferences.view.PreferencesView;
 
 public class PreferencesController {
-  private PreferencesModel preferencesmodel;
-  private PreferencesView preferencesview;
-  public PreferencesController(PreferencesModel preferencesmodel, PreferencesView preferencesview){
-    this.preferencesmodel = preferencesmodel;
-    this.preferencesview = preferencesview;
+  private PreferencesModel preferencesmodel = new PreferencesModel();
+  private PreferencesView preferencesview = new PreferencesView();
+  public PreferencesController(){
+    preferencesview.init(this, preferencesmodel);
   }
   public void init(){
     setState(initialState); advanceState("init");
