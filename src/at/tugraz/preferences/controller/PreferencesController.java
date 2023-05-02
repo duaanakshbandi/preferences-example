@@ -10,9 +10,9 @@ public class PreferencesController {
   private final PreferencesModel pm;
   private final PreferencesView pv;
 
-  private InterestThemesState interestThemesState = new InterestThemesState();
-  private ActivitiesState activitiesState = new ActivitiesState();
-  private SummarizationState summarizationState = new SummarizationState();
+  private final InterestThemesState interestThemesState = new InterestThemesState();
+  private final ActivitiesState activitiesState = new ActivitiesState();
+  private final SummarizationState summarizationState = new SummarizationState();
   private ControllerState state;
 
   public PreferencesController() {
