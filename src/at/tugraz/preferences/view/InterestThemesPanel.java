@@ -6,24 +6,12 @@ import java.awt.event.ActionListener;
 
 public class InterestThemesPanel {
 
-  public int getAdventureValue() {
-    return Integer.parseInt(cbAdventure.getSelectedItem().toString());
-  }
-
-  public int getCultureValue() {
-    return Integer.parseInt(cbCulture.getSelectedItem().toString());
-  }
-
-  public int getSportsValue() {
-    return Integer.parseInt(cbSports.getSelectedItem().toString());
-  }
-
   public JPanel getPanel() {
     return panel;
   }
 
   public interface NextButtonClickListener {
-    void onNextButtonClicked(ActionEvent e);
+    void onNextButtonClicked(ActionEvent e, InterestThemesPanelDataDTO dto);
   }
 
   public InterestThemesPanel() {
@@ -31,7 +19,12 @@ public class InterestThemesPanel {
       @Override
       public void actionPerformed(ActionEvent e) {
         if (nextButtonClickListener != null) {
-          nextButtonClickListener.onNextButtonClicked(e);
+          int adventure = Integer.parseInt(cbAdventure.getSelectedItem().toString());
+          int culture = Integer.parseInt(cbCulture.getSelectedItem().toString());
+          int sports = Integer.parseInt(cbSports.getSelectedItem().toString());
+
+          InterestThemesPanelDataDTO dto = new InterestThemesPanelDataDTO(adventure, culture, sports);
+          nextButtonClickListener.onNextButtonClicked(e, dto);
         }
       }
     });

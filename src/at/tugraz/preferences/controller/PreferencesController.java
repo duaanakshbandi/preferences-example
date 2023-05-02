@@ -28,10 +28,9 @@ public class PreferencesController {
     // register listeners
     pv.getInterestThemesPanel().setNextButtonClickListener(new InterestThemesPanel.NextButtonClickListener() {
       @Override
-      public void onNextButtonClicked(ActionEvent e) {
-        pm.setAdventure(pv.getInterestThemesPanel().getAdventureValue());
-        pm.setCulture(pv.getInterestThemesPanel().getCultureValue());
-        pm.setSports(pv.getInterestThemesPanel().getSportsValue());
+      public void onNextButtonClicked(ActionEvent e, InterestThemesPanelDataDTO dto) {
+        PreferencesModelMapper.fromInterestThemesPanelDataDTO(pm, dto);
+
         advanceState(e);
       }
     });
@@ -43,10 +42,9 @@ public class PreferencesController {
     });
     pv.getActivitiesPanel().setNextButtonClickListener(new ActivitiesPanel.NextButtonClickListener() {
       @Override
-      public void onNextButtonClicked(ActionEvent e) {
-        pm.setSauna(pv.getActivitiesPanel().getSaunaValue());
-        pm.setTennis(pv.getActivitiesPanel().getTennisValue());
-        pm.setGym(pv.getActivitiesPanel().getGymValue());
+      public void onNextButtonClicked(ActionEvent e, ActivitiesPanelDataDTO dto) {
+        PreferencesModelMapper.fromActivitiesPanelDataDTO(pm, dto);
+
         advanceState(e);
       }
     });
@@ -69,17 +67,11 @@ public class PreferencesController {
 
   public void advanceState(ActionEvent e) {
     switch (e.getActionCommand()) {
-      case "Next":
-        state.next();
-        break;
-      case "Back":
-        state.back();
-        break;
-      case "Store":
-        state.store();
-        break;
-      default:
-        break;
+      case "Next" -> state.next();
+      case "Back" -> state.back();
+      case "Store" -> state.store();
+      default -> {
+      }
     }
   }
 
@@ -99,13 +91,9 @@ public class PreferencesController {
   private class ActivitiesState extends ControllerState {
     public void next() {
       setState(summarizationState);
-      pv.getSummarizationPanel().setAdventureValue(pm.getAdventure());
-      pv.getSummarizationPanel().setCultureValue(pm.getCulture());
-      pv.getSummarizationPanel().setSportsValue(pm.getSports());
-      pv.getSummarizationPanel().setSaunaValue(pm.getSauna());
-      pv.getSummarizationPanel().setTennisValue(pm.getTennis());
-      pv.getSummarizationPanel().setGymValue(pm.getGym());
-      pv.showSummarization();
+      SummarizationPanelDataDTO dto = PreferencesModelMapper.toSummarizationPanelDataDTO(pm);
+
+      pv.showSummarization(dto);
     }
 
     public void back() {

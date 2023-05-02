@@ -37,7 +37,9 @@ public class PreferencesView extends JFrame {
     setVisible(true);
   }
 
-  public void showSummarization() {
+  public void showSummarization(SummarizationPanelDataDTO dto) {
+    summarizationPanel.setData(dto);
+
     setTitle("Preference Elicitation: Summary");
     setContentPane(summarizationPanel.getPanel());
     setVisible(true);

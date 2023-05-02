@@ -6,28 +6,13 @@ import java.awt.event.ActionListener;
 
 public class SummarizationPanel {
 
-  public void setAdventureValue(Integer adventureValue_) {
-    adventureValue.setText(adventureValue_.toString());
-  }
-
-  public void setCultureValue(Integer cultureValue_) {
-    cultureValue.setText(cultureValue_.toString());
-  }
-
-  public void setSportsValue(Integer sportsValue_) {
-    sportsValue.setText(sportsValue_.toString());
-  }
-
-  public void setSaunaValue(Integer saunaValue_) {
-    saunaValue.setText(saunaValue_.toString());
-  }
-
-  public void setTennisValue(Integer tennisValue_) {
-    tennisValue.setText(tennisValue_.toString());
-  }
-
-  public void setGymValue(Integer gymValue_) {
-    gymValue.setText(gymValue_.toString());
+  public void setData(SummarizationPanelDataDTO dto) {
+    adventureValue.setText(String.valueOf(dto.adventure()));
+    cultureValue.setText(String.valueOf(dto.culture()));
+    sportsValue.setText(String.valueOf(dto.sports()));
+    saunaValue.setText(String.valueOf(dto.sauna()));
+    tennisValue.setText(String.valueOf(dto.tennis()));
+    gymValue.setText(String.valueOf(dto.gym()));
   }
 
   public JPanel getPanel() {

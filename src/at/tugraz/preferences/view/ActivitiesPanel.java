@@ -6,18 +6,6 @@ import java.awt.event.ActionListener;
 
 public class ActivitiesPanel {
 
-  public int getSaunaValue() {
-    return Integer.parseInt(cbSauna.getSelectedItem().toString());
-  }
-
-  public int getTennisValue() {
-    return Integer.parseInt(cbTennis.getSelectedItem().toString());
-  }
-
-  public int getGymValue() {
-    return Integer.parseInt(cbGym.getSelectedItem().toString());
-  }
-
   public JPanel getPanel() {
     return panel;
   }
@@ -27,7 +15,7 @@ public class ActivitiesPanel {
   }
 
   public interface NextButtonClickListener {
-    void onNextButtonClicked(ActionEvent e);
+    void onNextButtonClicked(ActionEvent e, ActivitiesPanelDataDTO dto);
   }
 
   public ActivitiesPanel() {
@@ -43,7 +31,13 @@ public class ActivitiesPanel {
       @Override
       public void actionPerformed(ActionEvent e) {
         if (nextButtonClickListener != null) {
-          nextButtonClickListener.onNextButtonClicked(e);
+          ActivitiesPanelDataDTO dto = new ActivitiesPanelDataDTO(
+                  Integer.parseInt(cbSauna.getSelectedItem().toString()),
+                  Integer.parseInt(cbTennis.getSelectedItem().toString()),
+                  Integer.parseInt(cbGym.getSelectedItem().toString())
+          );
+
+          nextButtonClickListener.onNextButtonClicked(e, dto);
         }
       }
     });
