@@ -10,6 +10,7 @@ public class PreferencesModel {
   private int gym;
 
   public void store() {
+    // store preferences in database
   }
 
   public int getAdventure() {
