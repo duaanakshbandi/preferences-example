@@ -1,7 +1,9 @@
 package at.tugraz.preferences.controller;
 
 import at.tugraz.preferences.model.PreferencesModel;
-import at.tugraz.preferences.view.PreferencesView;
+import at.tugraz.preferences.view.*;
+
+import java.awt.event.ActionEvent;
 
 public class PreferencesController {
   private PreferencesModel pm = new PreferencesModel();
