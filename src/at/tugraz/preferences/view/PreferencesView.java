@@ -12,16 +12,20 @@ public class PreferencesView extends JFrame {
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setSize(450, 300);
   }
-  public void ShowInterestThemes() {
-    interestThemesFrame.setNextButtonClickListener(new InterestThemesView.NextButtonClickListener() {
-      @Override
-      public void onNextButtonClicked() {
-        preferencesmodel.setAdventure(interestThemesFrame.getAdventureValue());
-        preferencesmodel.setCulture(interestThemesFrame.getCultureValue());
-        preferencesmodel.setSports(interestThemesFrame.getSportsValue());
-        preferencescontroller.advanceState("next");
-      }
-    });
+
+  public InterestThemesPanel getInterestThemesPanel() {
+    return interestThemesPanel;
+  }
+
+  public ActivitiesPanel getActivitiesPanel() {
+    return activitiesPanel;
+  }
+
+  public SummarizationPanel getSummarizationPanel() {
+    return summarizationPanel;
+  }
+
+  public void showInterestThemes() {
     setTitle("Preference Elicitation: Activities");
     setContentPane(interestThemesFrame.getPanel());
     setVisible(true);
