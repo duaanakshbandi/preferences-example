@@ -13,56 +13,50 @@ public class PreferencesModel {
   }
 
   public int getAdventure() {
-    return Adventure;
+    return adventure;
   }
 
   public void setAdventure(int adventure) {
-    Adventure = adventure;
+    this.adventure = adventure;
   }
 
   public int getCulture() {
-    return Culture;
+    return culture;
   }
 
   public void setCulture(int culture) {
-    Culture = culture;
+    this.culture = culture;
   }
 
   public int getSports() {
-    return Sports;
+    return sports;
   }
 
   public void setSports(int sports) {
-    Sports = sports;
+    this.sports = sports;
   }
 
   public int getSauna() {
-    return Sauna;
+    return sauna;
   }
 
   public void setSauna(int sauna) {
-    Sauna = sauna;
+    this.sauna = sauna;
   }
 
   public int getTennis() {
-    return Tennis;
+    return tennis;
   }
 
   public void setTennis(int tennis) {
-    Tennis = tennis;
+    this.tennis = tennis;
   }
 
   public int getGym() {
-    return Gym;
+    return gym;
   }
 
   public void setGym(int gym) {
-    Gym = gym;
+    this.gym = gym;
   }
-  private int Adventure;
-  private int Culture;
-  private int Sports;
-  private int Sauna;
-  private int Tennis ;
-  private int Gym;
 }
