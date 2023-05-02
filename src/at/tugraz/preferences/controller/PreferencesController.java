@@ -6,10 +6,18 @@ import at.tugraz.preferences.view.*;
 import java.awt.event.ActionEvent;
 
 public class PreferencesController {
-  private PreferencesModel pm = new PreferencesModel();
-  private PreferencesView pv = new PreferencesView();
-  public PreferencesController(){
-    pv.init(this, pm);
+
+  private final PreferencesModel pm;
+  private final PreferencesView pv;
+
+  private InterestThemesState interestThemesState = new InterestThemesState();
+  private ActivitiesState activitiesState = new ActivitiesState();
+  private SummarizationState summarizationState = new SummarizationState();
+  private ControllerState state;
+
+  public PreferencesController() {
+    pm = new PreferencesModel();
+    pv = new PreferencesView();
   }
 
   private void setState(ControllerState state) {
@@ -72,27 +80,49 @@ public class PreferencesController {
         break;
       default:
         break;
-      default: break;
     }
   }
-  private abstract class ControllerState {
-    public void init() {}
+
+  private abstract static class ControllerState {
     public void next() {}
     public void back() {}
     public void store() {}
   }
-  private class INIT extends ControllerState {
-    public void init() { setState(INTEREST_THEMES); pv.ShowInterestThemes();}
+
+  private class InterestThemesState extends ControllerState {
+    public void next() {
+      setState(activitiesState);
+      pv.showActivities();
+    }
   }
-  private class INTEREST_THEMES extends ControllerState {
-    public void next() { setState(ACTIVITIES); pv.ShowActivities();}
+
+  private class ActivitiesState extends ControllerState {
+    public void next() {
+      setState(summarizationState);
+      pv.getSummarizationPanel().setAdventureValue(pm.getAdventure());
+      pv.getSummarizationPanel().setCultureValue(pm.getCulture());
+      pv.getSummarizationPanel().setSportsValue(pm.getSports());
+      pv.getSummarizationPanel().setSaunaValue(pm.getSauna());
+      pv.getSummarizationPanel().setTennisValue(pm.getTennis());
+      pv.getSummarizationPanel().setGymValue(pm.getGym());
+      pv.showSummarization();
+    }
+
+    public void back() {
+      setState(interestThemesState);
+      pv.showInterestThemes();
+    }
   }
-  private class ACTIVITIES extends ControllerState {
-    public void next() {setState(SUMMARIZATION); pv.ShowSummarization();}
-    public void back() {setState(INTEREST_THEMES); pv.ShowInterestThemes();}
-  }
-  private class SUMMARIZATION extends ControllerState {
-    public void back() {setState(ACTIVITIES); pv.ShowActivities();}
-    public void store() {pm.store(); pv.ShowStored();}
+
+  private class SummarizationState extends ControllerState {
+    public void back() {
+      setState(activitiesState);
+      pv.showActivities();
+    }
+
+    public void store() {
+      pm.store();
+      pv.showStored();
+    }
   }
 }

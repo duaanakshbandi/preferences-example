@@ -27,59 +27,23 @@ public class PreferencesView extends JFrame {
 
   public void showInterestThemes() {
     setTitle("Preference Elicitation: Activities");
-    setContentPane(interestThemesFrame.getPanel());
+    setContentPane(interestThemesPanel.getPanel());
     setVisible(true);
   }
-  public void ShowActivities() {
-    activitiesFrame.setBackButtonClickListener(new ActivitiesView.BackButtonClickListener() {
-      @Override
-      public void onBackButtonClicked() {
-        preferencescontroller.advanceState("back");
-      }
-    });
-    activitiesFrame.setNextButtonClickListener(new ActivitiesView.NextButtonClickListener() {
-      @Override
-      public void onNextButtonClicked() {
-        preferencesmodel.setSauna(activitiesFrame.getSaunaValue());
-        preferencesmodel.setTennis(activitiesFrame.getTennisValue());
-        preferencesmodel.setGym(activitiesFrame.getGymValue());
-        preferencescontroller.advanceState("next");
-      }
-    });
-    setTitle("Preference Elicitation: Activities");
-    setContentPane(activitiesFrame.getPanel());
-    setVisible(true);
-  }
-  public void ShowSummarization() {
-    summarizationFrame.setBackButtonClickListener(new SummarizationView.BackButtonClickListener() {
-      @Override
-      public void onBackButtonClicked() {
-        preferencescontroller.advanceState("back");
-      }
-    });
-    summarizationFrame.setStoreButtonClickListener(new SummarizationView.StoreButtonClickListener() {
-      @Override
-      public void onStoreButtonClicked() {
-        preferencescontroller.advanceState("store");
-      }
-    });
-    summarizationFrame.setAdventureValue(preferencesmodel.getAdventure());
-    summarizationFrame.setCultureValue(preferencesmodel.getCulture());
-    summarizationFrame.setSportsValue(preferencesmodel.getSports());
-    summarizationFrame.setSaunaValue(preferencesmodel.getSauna());
-    summarizationFrame.setTennisValue(preferencesmodel.getTennis());
-    summarizationFrame.setGymValue(preferencesmodel.getGym());
 
-    setTitle("Preference Elicitation: Summary");
-    setContentPane(summarizationFrame.getPanel());
+  public void showActivities() {
+    setTitle("Preference Elicitation: Activities");
+    setContentPane(activitiesPanel.getPanel());
     setVisible(true);
   }
-  public void ShowStored() {
-    JOptionPane.showMessageDialog(null, "Preferences stored!");
+
+  public void showSummarization() {
+    setTitle("Preference Elicitation: Summary");
+    setContentPane(summarizationPanel.getPanel());
+    setVisible(true);
   }
-  private PreferencesController preferencescontroller;
-  private PreferencesModel preferencesmodel;
-  private InterestThemesView interestThemesFrame = new InterestThemesView();
-  private ActivitiesView activitiesFrame = new ActivitiesView();
-  private SummarizationView summarizationFrame = new SummarizationView();
+
+  public void showStored() {
+    JOptionPane.showMessageDialog(this, "Preferences stored!");
+  }
 }
