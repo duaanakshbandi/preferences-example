@@ -47,7 +47,7 @@ public class SummarizationPanel {
       @Override
       public void actionPerformed(ActionEvent e) {
         if (backButtonClickListener != null) {
-          backButtonClickListener.onBackButtonClicked();
+          backButtonClickListener.onBackButtonClicked(e);
         }
       }
     });
@@ -55,7 +55,7 @@ public class SummarizationPanel {
       @Override
       public void actionPerformed(ActionEvent e) {
         if (storeButtonClickListener != null) {
-          storeButtonClickListener.onStoreButtonClicked();
+          storeButtonClickListener.onStoreButtonClicked(e);
         }
       }
     });

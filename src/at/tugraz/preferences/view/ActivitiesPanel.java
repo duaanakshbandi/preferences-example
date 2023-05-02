@@ -35,7 +35,7 @@ public class ActivitiesPanel {
       @Override
       public void actionPerformed(ActionEvent e) {
         if (backButtonClickListener != null) {
-          backButtonClickListener.onBackButtonClicked();
+          backButtonClickListener.onBackButtonClicked(e);
         }
       }
     });
@@ -43,7 +43,7 @@ public class ActivitiesPanel {
       @Override
       public void actionPerformed(ActionEvent e) {
         if (nextButtonClickListener != null) {
-          nextButtonClickListener.onNextButtonClicked();
+          nextButtonClickListener.onNextButtonClicked(e);
         }
       }
     });
