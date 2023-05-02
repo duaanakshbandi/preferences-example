@@ -35,10 +35,11 @@ public class SummarizationPanel {
   }
 
   public interface BackButtonClickListener {
-    void onBackButtonClicked();
+    void onBackButtonClicked(ActionEvent e);
   }
+
   public interface StoreButtonClickListener {
-    void onStoreButtonClicked();
+    void onStoreButtonClicked(ActionEvent e);
   }
 
   public SummarizationPanel() {

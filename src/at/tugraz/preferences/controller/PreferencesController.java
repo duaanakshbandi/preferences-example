@@ -9,26 +9,66 @@ public class PreferencesController {
   public PreferencesController(){
     pv.init(this, pm);
   }
-  public void init(){
-    setState(INITIAL_STATE); advanceState("init");
+
+  private void setState(ControllerState state) {
+    this.state = state;
   }
-  private INIT INITIAL_STATE = new INIT();
-  private INTEREST_THEMES INTEREST_THEMES = new INTEREST_THEMES();
-  private ACTIVITIES ACTIVITIES = new ACTIVITIES();
-  private SUMMARIZATION SUMMARIZATION = new SUMMARIZATION();
-  private ControllerState state;
-  private void setState(ControllerState state_) {
-    state = state_;
+
+  public void init() {
+    // register listeners
+    pv.getInterestThemesPanel().setNextButtonClickListener(new InterestThemesPanel.NextButtonClickListener() {
+      @Override
+      public void onNextButtonClicked(ActionEvent e) {
+        pm.setAdventure(pv.getInterestThemesPanel().getAdventureValue());
+        pm.setCulture(pv.getInterestThemesPanel().getCultureValue());
+        pm.setSports(pv.getInterestThemesPanel().getSportsValue());
+        advanceState(e);
+      }
+    });
+    pv.getActivitiesPanel().setBackButtonClickListener(new ActivitiesPanel.BackButtonClickListener() {
+      @Override
+      public void onBackButtonClicked(ActionEvent e) {
+        advanceState(e);
+      }
+    });
+    pv.getActivitiesPanel().setNextButtonClickListener(new ActivitiesPanel.NextButtonClickListener() {
+      @Override
+      public void onNextButtonClicked(ActionEvent e) {
+        pm.setSauna(pv.getActivitiesPanel().getSaunaValue());
+        pm.setTennis(pv.getActivitiesPanel().getTennisValue());
+        pm.setGym(pv.getActivitiesPanel().getGymValue());
+        advanceState(e);
+      }
+    });
+    pv.getSummarizationPanel().setBackButtonClickListener(new SummarizationPanel.BackButtonClickListener() {
+      @Override
+      public void onBackButtonClicked(ActionEvent e) {
+        advanceState(e);
+      }
+    });
+    pv.getSummarizationPanel().setStoreButtonClickListener(new SummarizationPanel.StoreButtonClickListener() {
+      @Override
+      public void onStoreButtonClicked(ActionEvent e) {
+        advanceState(e);
+      }
+    });
+
+    setState(interestThemesState);
+    pv.showInterestThemes();
   }
-  public void advanceState(String event) {
-    switch (event) {
-      case "init": { state.init(); }
-      break;
-      case "next": { state.next(); }
+
+  public void advanceState(ActionEvent e) {
+    switch (e.getActionCommand()) {
+      case "Next":
+        state.next();
         break;
-      case "back": { state.back(); }
+      case "Back":
+        state.back();
         break;
-      case "store": { state.store(); }
+      case "Store":
+        state.store();
+        break;
+      default:
         break;
       default: break;
     }

@@ -23,7 +23,7 @@ public class InterestThemesPanel {
   }
 
   public interface NextButtonClickListener {
-    void onNextButtonClicked();
+    void onNextButtonClicked(ActionEvent e);
   }
 
   public InterestThemesPanel() {
@@ -31,7 +31,7 @@ public class InterestThemesPanel {
       @Override
       public void actionPerformed(ActionEvent e) {
         if (nextButtonClickListener != null) {
-          nextButtonClickListener.onNextButtonClicked();
+          nextButtonClickListener.onNextButtonClicked(e);
         }
       }
     });

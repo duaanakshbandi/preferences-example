@@ -23,11 +23,11 @@ public class ActivitiesPanel {
   }
 
   public interface BackButtonClickListener {
-    void onBackButtonClicked();
+    void onBackButtonClicked(ActionEvent e);
   }
 
   public interface NextButtonClickListener {
-    void onNextButtonClicked();
+    void onNextButtonClicked(ActionEvent e);
   }
 
   public ActivitiesPanel() {
