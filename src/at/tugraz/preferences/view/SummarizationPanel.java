@@ -2,7 +2,9 @@ package at.tugraz.preferences.view;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-public class SummarizationView {
+
+public class SummarizationPanel {
+
   public void setAdventureValue(Integer adventureValue_) {
     adventureValue.setText(adventureValue_.toString());
   }

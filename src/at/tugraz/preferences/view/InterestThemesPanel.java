@@ -2,7 +2,9 @@ package at.tugraz.preferences.view;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-public class InterestThemesView {
+
+public class InterestThemesPanel {
+
   public int getAdventureValue() {
     return Integer.parseInt(cbAdventure.getSelectedItem().toString());
   }

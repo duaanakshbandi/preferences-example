@@ -3,9 +3,12 @@ import at.tugraz.preferences.controller.PreferencesController;
 import at.tugraz.preferences.model.PreferencesModel;
 import javax.swing.*;
 public class PreferencesView extends JFrame {
-  public void init(PreferencesController preferencescontroller, PreferencesModel preferencesmodel) {
-    this.preferencescontroller = preferencescontroller;
-    this.preferencesmodel = preferencesmodel;
+
+  private final InterestThemesPanel interestThemesPanel = new InterestThemesPanel();
+  private final ActivitiesPanel activitiesPanel = new ActivitiesPanel();
+  private final SummarizationPanel summarizationPanel = new SummarizationPanel();
+
+  public PreferencesView() {
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setSize(450, 300);
   }
