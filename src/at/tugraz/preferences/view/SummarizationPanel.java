@@ -1,41 +1,38 @@
 package at.tugraz.preferences.view;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-public class SummarizationView {
-  public void setAdventureValue(Integer adventureValue_) {
-    adventureValue.setText(adventureValue_.toString());
+
+public class SummarizationPanel {
+
+  public void setData(SummarizationPanelDataDTO dto) {
+    adventureValue.setText(String.valueOf(dto.adventure()));
+    cultureValue.setText(String.valueOf(dto.culture()));
+    sportsValue.setText(String.valueOf(dto.sports()));
+    saunaValue.setText(String.valueOf(dto.sauna()));
+    tennisValue.setText(String.valueOf(dto.tennis()));
+    gymValue.setText(String.valueOf(dto.gym()));
   }
-  public void setCultureValue(Integer cultureValue_) {
-    cultureValue.setText(cultureValue_.toString());
-  }
-  public void setSportsValue(Integer sportsValue_) {
-    sportsValue.setText(sportsValue_.toString());
-  }
-  public void setSaunaValue(Integer saunaValue_) {
-    saunaValue.setText(saunaValue_.toString());
-  }
-  public void setTennisValue(Integer tennisValue_) {
-    tennisValue.setText(tennisValue_.toString());
-  }
-  public void setGymValue(Integer gymValue_) {
-    gymValue.setText(gymValue_.toString());
-  }
+
   public JPanel getPanel() {
     return panel;
   }
+
   public interface BackButtonClickListener {
-    void onBackButtonClicked();
+    void onBackButtonClicked(ActionEvent e);
   }
+
   public interface StoreButtonClickListener {
-    void onStoreButtonClicked();
+    void onStoreButtonClicked(ActionEvent e);
   }
-  public SummarizationView() {
+
+  public SummarizationPanel() {
     backButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         if (backButtonClickListener != null) {
-          backButtonClickListener.onBackButtonClicked();
+          backButtonClickListener.onBackButtonClicked(e);
         }
       }
     });
@@ -43,17 +40,20 @@ public class SummarizationView {
       @Override
       public void actionPerformed(ActionEvent e) {
         if (storeButtonClickListener != null) {
-          storeButtonClickListener.onStoreButtonClicked();
+          storeButtonClickListener.onStoreButtonClicked(e);
         }
       }
     });
   }
+
   public void setBackButtonClickListener(BackButtonClickListener listener) {
     this.backButtonClickListener = listener;
   }
+
   public void setStoreButtonClickListener(StoreButtonClickListener listener) {
     this.storeButtonClickListener = listener;
   }
+
   private JLabel adventureValue;
   private JLabel cultureValue;
   private JLabel sportsValue;

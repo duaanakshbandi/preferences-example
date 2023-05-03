@@ -1,56 +1,116 @@
 package at.tugraz.preferences.controller;
 
 import at.tugraz.preferences.model.PreferencesModel;
-import at.tugraz.preferences.view.PreferencesView;
+import at.tugraz.preferences.view.*;
+
+import java.awt.event.ActionEvent;
 
 public class PreferencesController {
-  private PreferencesModel pm = new PreferencesModel();
-  private PreferencesView pv = new PreferencesView();
-  public PreferencesController(){
-    pv.init(this, pm);
-  }
-  public void init(){
-    setState(INITIAL_STATE); advanceState("init");
-  }
-  private INIT INITIAL_STATE = new INIT();
-  private INTEREST_THEMES INTEREST_THEMES = new INTEREST_THEMES();
-  private ACTIVITIES ACTIVITIES = new ACTIVITIES();
-  private SUMMARIZATION SUMMARIZATION = new SUMMARIZATION();
+
+  private final PreferencesModel pm;
+  private final PreferencesView pv;
+
+  private final InterestThemesState interestThemesState = new InterestThemesState();
+  private final ActivitiesState activitiesState = new ActivitiesState();
+  private final SummarizationState summarizationState = new SummarizationState();
   private ControllerState state;
-  private void setState(ControllerState state_) {
-    state = state_;
+
+  public PreferencesController() {
+    pm = new PreferencesModel();
+    pv = new PreferencesView();
   }
-  public void advanceState(String event) {
-    switch (event) {
-      case "init": { state.init(); }
-      break;
-      case "next": { state.next(); }
-        break;
-      case "back": { state.back(); }
-        break;
-      case "store": { state.store(); }
-        break;
-      default: break;
+
+  private void setState(ControllerState state) {
+    this.state = state;
+  }
+
+  public void init() {
+    // register listeners
+    pv.getInterestThemesPanel().setNextButtonClickListener(new InterestThemesPanel.NextButtonClickListener() {
+      @Override
+      public void onNextButtonClicked(ActionEvent e, InterestThemesPanelDataDTO dto) {
+        PreferencesModelMapper.fromInterestThemesPanelDataDTO(pm, dto);
+
+        advanceState(e);
+      }
+    });
+    pv.getActivitiesPanel().setBackButtonClickListener(new ActivitiesPanel.BackButtonClickListener() {
+      @Override
+      public void onBackButtonClicked(ActionEvent e) {
+        advanceState(e);
+      }
+    });
+    pv.getActivitiesPanel().setNextButtonClickListener(new ActivitiesPanel.NextButtonClickListener() {
+      @Override
+      public void onNextButtonClicked(ActionEvent e, ActivitiesPanelDataDTO dto) {
+        PreferencesModelMapper.fromActivitiesPanelDataDTO(pm, dto);
+
+        advanceState(e);
+      }
+    });
+    pv.getSummarizationPanel().setBackButtonClickListener(new SummarizationPanel.BackButtonClickListener() {
+      @Override
+      public void onBackButtonClicked(ActionEvent e) {
+        advanceState(e);
+      }
+    });
+    pv.getSummarizationPanel().setStoreButtonClickListener(new SummarizationPanel.StoreButtonClickListener() {
+      @Override
+      public void onStoreButtonClicked(ActionEvent e) {
+        advanceState(e);
+      }
+    });
+
+    setState(interestThemesState);
+    pv.showInterestThemes();
+  }
+
+  public void advanceState(ActionEvent e) {
+    switch (e.getActionCommand()) {
+      case "Next" -> state.next();
+      case "Back" -> state.back();
+      case "Store" -> state.store();
+      default -> {
+      }
     }
   }
-  private abstract class ControllerState {
-    public void init() {}
+
+  private abstract static class ControllerState {
     public void next() {}
     public void back() {}
     public void store() {}
   }
-  private class INIT extends ControllerState {
-    public void init() { setState(INTEREST_THEMES); pv.ShowInterestThemes();}
+
+  private class InterestThemesState extends ControllerState {
+    public void next() {
+      setState(activitiesState);
+      pv.showActivities();
+    }
   }
-  private class INTEREST_THEMES extends ControllerState {
-    public void next() { setState(ACTIVITIES); pv.ShowActivities();}
+
+  private class ActivitiesState extends ControllerState {
+    public void next() {
+      setState(summarizationState);
+      SummarizationPanelDataDTO dto = PreferencesModelMapper.toSummarizationPanelDataDTO(pm);
+
+      pv.showSummarization(dto);
+    }
+
+    public void back() {
+      setState(interestThemesState);
+      pv.showInterestThemes();
+    }
   }
-  private class ACTIVITIES extends ControllerState {
-    public void next() {setState(SUMMARIZATION); pv.ShowSummarization();}
-    public void back() {setState(INTEREST_THEMES); pv.ShowInterestThemes();}
-  }
-  private class SUMMARIZATION extends ControllerState {
-    public void back() {setState(ACTIVITIES); pv.ShowActivities();}
-    public void store() {pm.store(); pv.ShowStored();}
+
+  private class SummarizationState extends ControllerState {
+    public void back() {
+      setState(activitiesState);
+      pv.showActivities();
+    }
+
+    public void store() {
+      pm.store();
+      pv.showStored();
+    }
   }
 }
